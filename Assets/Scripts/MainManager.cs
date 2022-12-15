@@ -34,7 +34,7 @@ public class MainManager : MonoBehaviour
                 brick.onDestroyed.AddListener(AddPoint);
             }
         }
-        MainText.text = DataManager.Instance.BestPlayer;
+        MainText.text = $"{DataManager.Instance.CurPlayer.Name} - {DataManager.Instance.Highscore}";
     }
 
     private void Update()
@@ -56,7 +56,11 @@ public class MainManager : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+                SceneManager.LoadScene(1);
+            }
+            else if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                SceneManager.LoadScene(0);
             }
         }
     }
@@ -73,6 +77,5 @@ public class MainManager : MonoBehaviour
         GameOverText.SetActive(true);
 
         DataManager.Instance.GameOver();
-        DataManager.Instance.UpdateBestPlayer();
     }
 }
