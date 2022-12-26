@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class MenuScript : MonoBehaviour
 {
-    private Text nameField;
+    private InputField nameField;
     private Text highscores;
 
     private IEnumerator Load()
@@ -20,19 +20,19 @@ public class MenuScript : MonoBehaviour
             str += $"#{i + 1} {data[i]}\n";
 
         RectTransform content = GameObject.Find("Canvas/Highscores/Viewport/Content").GetComponent<RectTransform>();
-        content.sizeDelta += new Vector2(0, data.Length * 22);
+        content.sizeDelta += new Vector2(0, data.Length * 24 + 10);
 
         highscores.text = str;
+        nameField.text = DataManager.Instance.CurPlayer.Name;
     }
 
     // Start is called before the first frame update
     private void Start()
     {
-        nameField = GameObject.Find("Canvas/NameField/Text").GetComponent<Text>();
+        nameField = GameObject.Find("Canvas/NameField").GetComponent<InputField>();
         highscores = GameObject.Find("Canvas/Highscores/Viewport/Content/Text").GetComponent<Text>();
 
-        InputField input = GameObject.Find("Canvas/NameField").GetComponent<InputField>();
-        input.onValidateInput += ValidateInput;
+        nameField.onValidateInput += ValidateInput;
 
         StartCoroutine(Load());
     }

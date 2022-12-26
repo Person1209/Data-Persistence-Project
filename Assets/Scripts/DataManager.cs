@@ -50,7 +50,7 @@ public class DataManager : MonoBehaviour
         {
             m_data = new SaveData(new List<PlayerData>());
         }
-        m_data.PrintAll();
+        //m_data.PrintAll();
     }
     private void SaveData()
     {
@@ -68,7 +68,6 @@ public class DataManager : MonoBehaviour
     public void SetCurPlayer(string name)
     {
         m_curPlr = new PlayerData(name, 0);
-        m_data.Get(ref m_curPlr);
     }
     public void PlayerScored(int points)
     {
@@ -100,17 +99,6 @@ public struct SaveData
     {
         players.Add(plr);
         players.Sort(Comparator);
-    }
-    public void Get(ref PlayerData plr)
-    {
-        for (int i = 0; i < players.Count; ++i)
-        {
-            if (players[i] == plr)
-            {
-                plr = players[i];
-                return;
-            }
-        }
     }
     public PlayerData Get(string name)
     {
